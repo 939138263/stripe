@@ -15,12 +15,15 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-  const response = await fetch("http://aigtd.51smartsafe.com/user/auth/user/buy/1", {
+  const response = await fetch("http://aigtd.51smartsafe.com/user/auth/user/buy", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Aigtd-Token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBaUd0ZCIsImV4cCI6MTcxOTYyOTY5OSwidXNlcklkIjoiMiJ9.yXiW73a_89dzH2ptZm9BTyKyuXYnObNzvRo3gdFuynI"
      },
+    body: {
+      skuId: 1
+    },
     // body: JSON.stringify({ items }),
   });
   const { clientSecret } = await response.json();
