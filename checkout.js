@@ -27,7 +27,7 @@ async function initialize() {
   const searchStr = window.location.search;
   // URLSearchParams() 构造函数可以接受一个查询字符串作为参数，用于初始化 URLSearchParams 对象。
   const searchParams = new URLSearchParams(searchStr);
-
+elements = stripe.elements({ appearance, clientSecret: searchParams.get('clientSecret') });
   const paymentElementOptions = {
     layout: "tabs",
   };
