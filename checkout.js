@@ -15,22 +15,18 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-  const response = await fetch("http://aigtd.51smartsafe.com/user/auth/user/buy", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Aigtd-Token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBaUd0ZCIsImV4cCI6MTcxOTYyOTY5OSwidXNlcklkIjoiMiJ9.yXiW73a_89dzH2ptZm9BTyKyuXYnObNzvRo3gdFuynI"
-     },
-    body: {
-      skuId: 1
-    },
-    // body: JSON.stringify({ items }),
-  });
-  const { clientSecret } = await response.json();
-  const appearance = {
-    theme: 'stripe',
-  };
-  elements = stripe.elements({ appearance, clientSecret});
+  // const response = await fetch("http://aigtd.51smartsafe.com/user/auth/user/buy", {
+  //   method: "POST", // *GET, POST, PUT, DELETE, etc.
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "aigtd-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBaUd0ZCIsImV4cCI6MTcyMzUyNzk0MiwidXNlcklkIjoiMTgwMjUzMDU2MzczNTc4OTU2OSJ9.mNHXbK90Kg7r03RVqZ4FHy36kMftgN9_KNiRexl8-u8"
+  //   },
+  //   body: JSON.stringify({ skuId: 1 }), // body data type must match "Content-Type" header
+  // });
+  // const { data } = await response.json();
+  const searchStr = window.location.search;
+  // URLSearchParams() 构造函数可以接受一个查询字符串作为参数，用于初始化 URLSearchParams 对象。
+  const searchParams = new URLSearchParams(searchStr);
 
   const paymentElementOptions = {
     layout: "tabs",
@@ -48,7 +44,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "http://aigtd.51smartsafe.com/complete.html",
+      return_url: " https://939138263.github.io/stripe/complete.html",
     },
   });
 
