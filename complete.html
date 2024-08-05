@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
 
@@ -8,11 +9,64 @@
   <script src="complete.js" defer></script>
   <title>Title</title>
 </head>
+<style type="text/css">
+  .btn {
+    display: block;
+    margin: 20px auto;
+    padding: 5px;
+    background-color: #007aff;
+    border: 0;
+    color: #ffffff;
+    height: 40px;
+    width: 200px;
+  }
+
+  .btn-red {
+    background-color: #dd524d;
+  }
+</style>
+
 <body>
 
-<div id="payment-message">
+  <div style="display: flex;flex-direction: column;">
+    <div id="payment-message">
 
-</div>
-
+    </div>
+    <div class="btn-list">
+      <button class="btn btn-red" type="button" id="postMessage">postMessage</button>
+    </div>
+  </div>
 </body>
+
 </html>
+<script type="text/javascript" src="./1.js"></script>
+<script type="text/javascript">
+  document.addEventListener('UniAppJSBridgeReady', function () {
+    uni.getEnv(function(res) {  
+        console.log('当前环境：' + JSON.stringify(res));  
+    }); 
+    document.querySelector('.btn-list').addEventListener('click', function (evt) {
+      var target = evt.target;
+      if (target.tagName === 'BUTTON') {
+        document.getElementById('postMessage').addEventListener('click', function() {
+          uni.postMessage({
+            data: {
+              action: 'message'
+            }
+          });
+        });
+
+        uni.redirectTo({
+          url: '/views/user/index',
+          success: function(res) {
+            console.log('success', res);
+          },
+          fail: function(err) {
+            console.log('fail', err);
+          }
+        })
+      }
+
+    })
+  })
+</script>
